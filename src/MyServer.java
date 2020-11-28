@@ -5,7 +5,7 @@ import java.io.*;
 
 public class MyServer {
     public static void main(String[] args) {
-        int portNumber = 1234; //Integer.parseInt(args[0]);
+        int portNumber = Integer.parseInt(args[0]);     //1234
         try{
             //seulement pour un client
             //crée un nouveau serveur

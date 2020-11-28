@@ -35,14 +35,14 @@ import java.net.*;
 public class MyClient {
     public static void main(String[] args) throws IOException {
 
-        /*if (args.length != 2) {
+        if (args.length != 2) {
             System.err.println(
                     "Usage: java EchoClient <host name> <port number>");
             System.exit(1);
-        }*/
+        }
 
-        String hostName = "Serveur"; //args[0];
-        int portNumber = 1234; //Integer.parseInt(args[1]);
+        String hostName = args[0];      //commande hostname     Damien : LAPTOP-TQFF0SRJ
+        int portNumber = Integer.parseInt(args[1]);     //1234
 
         try (
                 Socket kkSocket = new Socket(hostName, portNumber);
