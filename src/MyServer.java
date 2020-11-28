@@ -26,11 +26,17 @@ public class MyServer {
             //System.out.println(lines + "\n");
 
             String curLine;
+            int i = 0;
             while ((curLine = bufferedReader.readLine()) != null){
                 //process the line as required
-                System.out.println(curLine);
-                //data[curLine][0] =
+                //System.out.println(curLine);
+                String [] splitString = curLine.split("@@@");
+                data[i][0] = splitString[0];
+                data[i][1] = splitString[1];
+                //System.out.println(data[i][0] + "->" + data[i][1]);
+                i++;
             }
+            //System.out.println(data[i-1][0] + "->" + data[i-1][1]);
             bufferedReader.close();
 
             //attend qu'un client essaie de se connecter
