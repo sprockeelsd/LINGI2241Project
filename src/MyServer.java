@@ -10,12 +10,11 @@ public class MyServer {
             //seulement pour un client
             //crée un nouveau serveur
             ServerSocket serverSocket = new ServerSocket(portNumber);
-            System.out.println("port créé");
+            System.out.println("serveur cree, ecoute sur le port "+portNumber);
             //attend qu'un client essaie de se connecter
             Socket clientSocket = serverSocket.accept();//retourne un socket lié au port portNumber et avec le n. de port et l'adresse du client
-            System.out.println("client connecté");
-            PrintWriter out =
-                        new PrintWriter(clientSocket.getOutputStream(), true);
+            System.out.println("client connecte");
+            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
                 BufferedReader in = new BufferedReader(
                         new InputStreamReader(clientSocket.getInputStream()));
             String inputLine, outputLine;
@@ -34,7 +33,7 @@ public class MyServer {
             System.out.println("fin de try");
         }
         catch(IOException e){
-            System.out.println("error");
+            System.out.println("this port is already taken");
         }
     }
 }
