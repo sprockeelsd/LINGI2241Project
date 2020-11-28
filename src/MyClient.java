@@ -41,7 +41,7 @@ public class MyClient {
             System.exit(1);
         }
 
-        String hostName = args[0];      //commande hostname     Damien : LAPTOP-TQFF0SRJ
+        String hostName = args[0];      //commande hostname     Damien : LAPTOP-TQFF0SRJ  Arnaud : LAPTOP-I9J1EU77
         int portNumber = Integer.parseInt(args[1]);     //1234
 
         try (
