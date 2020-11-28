@@ -4,13 +4,35 @@ import java.net.Socket;
 import java.io.*;
 
 public class MyServer {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         int portNumber = Integer.parseInt(args[0]);     //1234
+        //nom du fichier
+        String file = "dbdata.txt";
+        //pour lire le fichier
+        BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+        BufferedReader counter = new BufferedReader(new FileReader(file));
         try{
             //seulement pour un client
             //crée un nouveau serveur
             ServerSocket serverSocket = new ServerSocket(portNumber);
             System.out.println("serveur cree, ecoute sur le port "+portNumber);
+
+            //charger le fichier et le mettre dans un tableau data[N][2] ou N = nb de lignes : une colonne pour type et une pour sentence
+            //compte le nombre de lignes dans le fichier
+            int lines = 0;
+            while (counter.readLine() != null) lines++;
+            counter.close();
+            String data[][] = new String[lines][2];
+            //System.out.println(lines + "\n");
+
+            String curLine;
+            while ((curLine = bufferedReader.readLine()) != null){
+                //process the line as required
+                System.out.println(curLine);
+                //data[curLine][0] =
+            }
+            bufferedReader.close();
+
             //attend qu'un client essaie de se connecter
             Socket clientSocket = serverSocket.accept();//retourne un socket lié au port portNumber et avec le n. de port et l'adresse du client
             System.out.println("client connecte");
@@ -33,7 +55,7 @@ public class MyServer {
             System.out.println("fin de try");
         }
         catch(IOException e){
-            System.out.println("this port is already taken");
+            System.out.println("this port is already taken or the client disconnected");
         }
     }
 }
