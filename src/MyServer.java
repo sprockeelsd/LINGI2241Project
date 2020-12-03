@@ -36,7 +36,7 @@ public class MyServer {
                 //System.out.println(data[i][0] + "->" + data[i][1]);
                 i++;
             }
-            //System.out.println(data[i-1][0] + "->" + data[i-1][1]);
+            //System.out.println(data[i][0] + "->" + data[i-1][1]);
             bufferedReader.close();
 
             //attend qu'un client essaie de se connecter
