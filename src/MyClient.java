@@ -33,8 +33,9 @@ import java.io.*;
 import java.net.*;
 
 public class MyClient {
+    public static int transmitionStarted = 0;
     public static void main(String[] args) throws IOException {
-
+        //check le bon nombre d'arguments
         if (args.length != 2) {
             System.err.println(
                     "Usage: java EchoClient <host name> <port number>");
@@ -59,11 +60,17 @@ public class MyClient {
                 System.out.println("Server: " + fromServer);
                 if (fromServer.equals("Bye."))
                     break;
-
-                fromUser = stdIn.readLine();
-                if (fromUser != null) {
-                    System.out.println("Client: " + fromUser);
-                    out.println(fromUser);
+                if(fromServer == "\n")
+                    transmitionStarted = 0;
+                if(fromServer == "\n" || transmitionStarted == 0){
+                    //on a commencé à parler au serveur
+                    transmitionStarted = 1;
+                    //le client entre une requête
+                    fromUser = stdIn.readLine();
+                    if (fromUser != null) {
+                        System.out.println("Client: " + fromUser);
+                        out.println(fromUser);
+                    }
                 }
             }
         } catch (UnknownHostException e) {

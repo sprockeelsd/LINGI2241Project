@@ -33,26 +33,71 @@ import java.net.*;
 import java.io.*;
 
 public class MyProtocol {
-    private static final int WAITING = 0;
+    /*private static final int WAITING = 0;
     private static final int SENTKNOCKKNOCK = 1;
     private static final int SENTCLUE = 2;
-    private static final int ANOTHER = 3;
+    private static final int ANOTHER = 3;*/
+    private static final int WAITINGFORREQUEST = 4;
+    private static final int CLOSING = 5;
+    //private static final int NUMJOKES = 5;
 
-    private static final int NUMJOKES = 5;
+    private int state = WAITINGFORREQUEST;
+    //private int currentJoke = 0;
 
-    private int state = WAITING;
-    private int currentJoke = 0;
-
-    private String[] clues = { "Turnip", "Little Old Lady", "Atch", "Who", "Who" };
+    /*private String[] clues = { "Turnip", "Little Old Lady", "Atch", "Who", "Who" };
     private String[] answers = { "Turnip the heat, it's cold in here!",
             "I didn't know you could yodel!",
             "Bless you!",
             "Is there an owl in here?",
-            "Is there an echo in here?" };
-
+            "Is there an echo in here?" };*/
     public String processInput(String theInput) {
-        String theOutput = null;
+        String theOutputString = "";
 
+        if (state == WAITINGFORREQUEST) { //si tout va bien et qu'on attend une requête
+            if (theInput == null || theInput.equals("\n") || theInput.equals("")) {//si l'argument est nul
+                theOutputString = "connection established or wrong argument";
+            }
+            else {
+                //récupère les types et la phrase
+                String[] input = theInput.split(";");
+                int types[] = {1,2,3,4,5};//cas par défaut
+                //si les types sont précisés
+                if(!input[0].equals("")){
+                    //récupérer les types
+                    String integers[] = input[0].split(",");
+                    types = new int[integers.length];
+                    for(int k = 0; k < integers.length; k++){
+                        types[k] = Integer.parseInt(integers[k]);
+                        //System.out.println("types = " + types[k]);
+                    }
+                }
+
+                int i = 0;
+                //on parcours les données
+                while (i < MyServer.dataSize) {
+                    //récupère la ligne du tableau
+                    String currLine[] = {MyServer.data[i][0], MyServer.data[i][1]};
+                    //System.out.println(i + " " + currLine[0] + currLine[1] + "\n");
+                    //si la phrase lue dans le fichier est celle demandée
+                    if (currLine[1].equals(input[1])) {
+                        //check si c'est le bon type
+                        for(int k = 0; k < types.length; k++){
+                            //si c'est le bon type
+                            if(Integer.parseInt(currLine[0]) == types[k]){
+                                //System.out.println("ligne trouvée : " + currLine[0] + " " + currLine[1] + "\n" + "i = " + i);
+                                theOutputString = theOutputString + currLine[0] + " " + currLine[1] + "\n";
+                            }
+                        }
+                    }
+                    i++;
+                }
+            }
+        }
+        System.out.println(theOutputString);
+        return theOutputString + "\n";
+    }
+}
+/*String theOutput = null;
         if (state == WAITING) {
             theOutput = "Knock! Knock!";
             state = SENTKNOCKKNOCK;
@@ -88,6 +133,4 @@ public class MyProtocol {
                 state = WAITING;
             }
         }
-        return theOutput;
-    }
-}
+        return theOutput;*/
