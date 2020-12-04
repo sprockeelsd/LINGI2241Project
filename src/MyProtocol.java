@@ -51,7 +51,7 @@ public class MyProtocol {
             "Is there an owl in here?",
             "Is there an echo in here?" };*/
     public String processInput(String theInput) {
-        String theOutputString = "";
+        String theOutputString = null;
 
         if (state == WAITINGFORREQUEST) { //si tout va bien et qu'on attend une requête
             if (theInput == null || theInput.equals("\n") || theInput.equals("")) {//si l'argument est nul
@@ -85,16 +85,22 @@ public class MyProtocol {
                             //si c'est le bon type
                             if(Integer.parseInt(currLine[0]) == types[k]){
                                 //System.out.println("ligne trouvée : " + currLine[0] + " " + currLine[1] + "\n" + "i = " + i);
-                                theOutputString = theOutputString + currLine[0] + " " + currLine[1] + "\n";
+                                if(theOutputString == null){
+                                    theOutputString = currLine[0] + " " + currLine[1] + "\n";
+                                }
+                                else {
+                                    theOutputString = theOutputString + currLine[0] + " " + currLine[1] + "\n";
+                                }
                             }
                         }
                     }
                     i++;
                 }
+                //theOutputString = theOutputString + "\n";
             }
         }
         System.out.println(theOutputString);
-        return theOutputString + "\n";
+        return theOutputString;
     }
 }
 /*String theOutput = null;

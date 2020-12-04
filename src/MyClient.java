@@ -57,17 +57,20 @@ public class MyClient {
             String fromUser;
 
             while ((fromServer = in.readLine()) != null) {
-                System.out.println("Server: " + fromServer);
-                if (fromServer.equals("Bye."))
+                if(!fromServer.equals("")){
+                    System.out.println("Server: " + fromServer);
+                }
+                if (fromServer.equals("Bye.")) {
                     break;
-                if(fromServer == "\n")
-                    transmitionStarted = 0;
-                if(fromServer == "\n" || transmitionStarted == 0){
-                    //on a commencé à parler au serveur
-                    transmitionStarted = 1;
+                }
+                if(fromServer.equals("") || transmitionStarted == 0){
+                    System.out.println("if pour lire l entree");
                     //le client entre une requête
                     fromUser = stdIn.readLine();
                     if (fromUser != null) {
+                        System.out.println("if from user");
+                        //on a commencé à parler au serveur
+                        transmitionStarted = 1;
                         System.out.println("Client: " + fromUser);
                         out.println(fromUser);
                     }
