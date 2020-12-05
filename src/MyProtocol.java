@@ -60,6 +60,13 @@ public class MyProtocol {
             else {
                 //récupère les types et la phrase
                 String[] input = theInput.split(";");
+                //si le client veut se déconnecter
+                if(input[0].equals("Goodbye")){
+                    return "Bye.\n";
+                }
+                if(input.length != 2){
+                    return "Invalid request\n";
+                }
                 int types[] = {1,2,3,4,5};//cas par défaut
                 //si les types sont précisés
                 if(!input[0].equals("")){
@@ -98,6 +105,9 @@ public class MyProtocol {
                 }
                 //theOutputString = theOutputString + "\n";
             }
+        }
+        if(theOutputString == null){
+            return "Couldn't find what you are looking for \n";
         }
         System.out.println(theOutputString);
         return theOutputString;

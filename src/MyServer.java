@@ -42,7 +42,7 @@ class TaskThread implements Runnable
 
         catch(IOException e)
         {
-            System.out.println("this port is already taken or the client disconnected");
+            System.out.println("this port is already taken or a client disconnected");
         }
     }
 }
