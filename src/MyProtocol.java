@@ -54,7 +54,7 @@ public class MyProtocol {
         String theOutputString = null;
 
         if (state == WAITINGFORREQUEST) { //si tout va bien et qu'on attend une requête
-            if (theInput == null || theInput.equals("\n") || theInput.equals("")) {//si l'argument est nul
+            if (theInput == null) {//si l'argument est nul  || theInput.equals("\n") || theInput.equals("")
                 theOutputString = "connection established or wrong argument";
             }
             else {

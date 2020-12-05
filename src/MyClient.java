@@ -64,11 +64,11 @@ public class MyClient {
                     break;
                 }
                 if(fromServer.equals("") || transmitionStarted == 0){
-                    System.out.println("if pour lire l entree");
+                    //System.out.println("if pour lire l entree");
                     //le client entre une requête
                     fromUser = stdIn.readLine();
                     if (fromUser != null) {
-                        System.out.println("if from user");
+                        //System.out.println("if from user");
                         //on a commencé à parler au serveur
                         transmitionStarted = 1;
                         System.out.println("Client: " + fromUser);
