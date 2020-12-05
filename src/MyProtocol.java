@@ -88,14 +88,13 @@ public class MyProtocol {
                     //si la phrase lue dans le fichier est celle demandée
                     if (currLine[1].equals(input[1])) {
                         //check si c'est le bon type
-                        for(int k = 0; k < types.length; k++){
+                        for(int k = 0; k < types.length; k++) {
                             //si c'est le bon type
-                            if(Integer.parseInt(currLine[0]) == types[k]){
+                            if (Integer.parseInt(currLine[0]) == types[k]) {
                                 //System.out.println("ligne trouvée : " + currLine[0] + " " + currLine[1] + "\n" + "i = " + i);
-                                if(theOutputString == null){
+                                if (theOutputString == null) {
                                     theOutputString = currLine[0] + " " + currLine[1] + "\n";
-                                }
-                                else {
+                                } else {
                                     theOutputString = theOutputString + currLine[0] + " " + currLine[1] + "\n";
                                 }
                             }
