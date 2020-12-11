@@ -64,7 +64,13 @@ public class MyProtocol {
                 if(input[0].equals("Goodbye")){
                     return "Bye.\n";
                 }
+                if(input.length == 1){
+                    return "\n";
+                }
                 if(input.length != 2){
+                    for(int j = 0; j < input.length; j++) {
+                        System.out.println(input[j]);
+                    }
                     return "Invalid request\n";
                 }
                 int types[] = {1,2,3,4,5};//cas par défaut

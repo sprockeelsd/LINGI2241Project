@@ -36,6 +36,7 @@ public class MyClient {
     public int transmitionStarted = 0;
     public int id;
     public String Requests[];
+    public boolean GoodbyeSent = false;
 
     //commande hostname     Damien : LAPTOP-TQFF0SRJ  Arnaud : LAPTOP-I9J1EU77
     public MyClient(int id, String[] Requests){
@@ -65,8 +66,12 @@ public class MyClient {
                 }
                 if(fromServer.equals("") || transmitionStarted == 0){
                     //le client entre une requête
-                    if(i >= this.Requests.length){
+                    if(GoodbyeSent){
+                        fromUser = null;
+                    }
+                    else if(i >= this.Requests.length && !GoodbyeSent){
                         fromUser = "Goodbye";
+                        GoodbyeSent = true;
                     }
                     else{
                         fromUser = this.Requests[i];
