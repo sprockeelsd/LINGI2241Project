@@ -65,7 +65,7 @@ public class MyClient {
                 }
                 if(fromServer.equals("") || transmitionStarted == 0){
                     //le client entre une requête
-                    if(i > this.Requests.length){
+                    if(i >= this.Requests.length){
                         fromUser = "Goodbye";
                     }
                     else{
