@@ -11,9 +11,9 @@ public class MyServer {
     //les données du fichier
     public static String[][] data;
     public static int dataSize;
+    public static int portNumber = 1234;  //1234
 
-    public static void main(String[] args) throws FileNotFoundException {
-        int portNumber = Integer.parseInt(args[0]);     //1234
+    public static void main (String[] args) throws FileNotFoundException {
         //nom du fichier
         String file = "dbdata.txt";
         //pour lire le fichier

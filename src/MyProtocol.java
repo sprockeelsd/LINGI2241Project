@@ -86,7 +86,7 @@ public class MyProtocol {
                     String currLine[] = {MyServer.data[i][0], MyServer.data[i][1]};
                     //System.out.println(i + " " + currLine[0] + currLine[1] + "\n");
                     //si la phrase lue dans le fichier est celle demandée
-                    if (currLine[1].equals(input[1])) {
+                    if (currLine[1].contains(input[1])) {
                         //check si c'est le bon type
                         for(int k = 0; k < types.length; k++) {
                             //si c'est le bon type
@@ -112,40 +112,3 @@ public class MyProtocol {
         return theOutputString;
     }
 }
-/*String theOutput = null;
-        if (state == WAITING) {
-            theOutput = "Knock! Knock!";
-            state = SENTKNOCKKNOCK;
-        } else if (state == SENTKNOCKKNOCK) {
-            if (theInput.equalsIgnoreCase("Who's there?")) {
-                theOutput = clues[currentJoke];
-                state = SENTCLUE;
-            } else {
-                theOutput = "You're supposed to say \"Who's there?\"! " +
-                        "Try again. Knock! Knock!";
-            }
-        } else if (state == SENTCLUE) {
-            if (theInput.equalsIgnoreCase(clues[currentJoke] + " who?")) {
-                theOutput = answers[currentJoke] + " Want another? (y/n)";
-                state = ANOTHER;
-            } else {
-                theOutput = "You're supposed to say \"" +
-                        clues[currentJoke] +
-                        " who?\"" +
-                        "! Try again. Knock! Knock!";
-                state = SENTKNOCKKNOCK;
-            }
-        } else if (state == ANOTHER) {
-            if (theInput.equalsIgnoreCase("y")) {
-                theOutput = "Knock! Knock!";
-                if (currentJoke == (NUMJOKES - 1))
-                    currentJoke = 0;
-                else
-                    currentJoke++;
-                state = SENTKNOCKKNOCK;
-            } else {
-                theOutput = "Bye.";
-                state = WAITING;
-            }
-        }
-        return theOutput;*/

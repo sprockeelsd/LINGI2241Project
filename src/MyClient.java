@@ -33,17 +33,17 @@ import java.io.*;
 import java.net.*;
 
 public class MyClient {
-    public static int transmitionStarted = 0;
-    public static void main(String[] args) throws IOException {
-        //check le bon nombre d'arguments
-        if (args.length != 2) {
-            System.err.println(
-                    "Usage: java EchoClient <host name> <port number>");
-            System.exit(1);
-        }
+    public int transmitionStarted = 0;
+    public int id;
+    public String Requests[];
 
-        String hostName = args[0];      //commande hostname     Damien : LAPTOP-TQFF0SRJ  Arnaud : LAPTOP-I9J1EU77
-        int portNumber = Integer.parseInt(args[1]);     //1234
+    //commande hostname     Damien : LAPTOP-TQFF0SRJ  Arnaud : LAPTOP-I9J1EU77
+    public MyClient(int id, String[] Requests){
+        this.id = id;
+        this.Requests = Requests;
+    }
+
+    public void connect(String hostName, int portNumber) throws IOException {
 
         try (
                 Socket kkSocket = new Socket(hostName, portNumber);
@@ -55,8 +55,8 @@ public class MyClient {
                     new BufferedReader(new InputStreamReader(System.in));
             String fromServer;
             String fromUser;
-
-            while ((fromServer = in.readLine()) != null) {
+            int i = 0;
+            while ((fromServer = in.readLine()) != null || i < this.Requests.length) {
                 if(!fromServer.equals("")){
                     System.out.println("Server: " + fromServer);
                 }
@@ -64,11 +64,15 @@ public class MyClient {
                     break;
                 }
                 if(fromServer.equals("") || transmitionStarted == 0){
-                    //System.out.println("if pour lire l entree");
                     //le client entre une requête
-                    fromUser = stdIn.readLine();
+                    if(i > this.Requests.length){
+                        fromUser = "Goodbye";
+                    }
+                    else{
+                        fromUser = this.Requests[i];
+                        i++;
+                    }
                     if (fromUser != null) {
-                        //System.out.println("if from user");
                         //on a commencé à parler au serveur
                         transmitionStarted = 1;
                         System.out.println("Client: " + fromUser);
