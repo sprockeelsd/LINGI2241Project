@@ -50,5 +50,6 @@ public class Main {
             Runnable worker = new ClientThread(i,Requestss[i]);
             executor.execute(worker);
         }
+        executor.shutdown();
     }
 }
