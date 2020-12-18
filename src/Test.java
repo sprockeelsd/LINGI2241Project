@@ -4,6 +4,5 @@ public class Test {
         String s = "cou";
         boolean contains = S.contains(s);
         System.out.println(contains);
-        MyClient client = new MyClient(0);
     }
 }
