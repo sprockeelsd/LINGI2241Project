@@ -2,27 +2,22 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.io.*;
-import java.text.SimpleDateFormat;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class MyServer {
-    //les données du fichier
-    public static String[][] data;
+    public static String[][] data;  //les données du fichier
     public static int dataSize;
     public static int portNumber = 1234;  //1234
 
     public static void main (String[] args) throws FileNotFoundException {
-        //nom du fichier
-        String file = "dbdata.txt";
+        String file = "dbdata.txt"; //nom du fichier
         //pour lire le fichier
         BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
         BufferedReader counter = new BufferedReader(new FileReader(file));
         try{
-            //seulement pour un client
-            //crée un nouveau serveur
-            ServerSocket serverSocket = new ServerSocket(portNumber);
+            ServerSocket serverSocket = new ServerSocket(portNumber);   //crée un nouveau serveur
             System.out.println("serveur cree, ecoute sur le port "+portNumber);
 
             //charger le fichier et le mettre dans un tableau data[N][2] ou N = nb de lignes : une colonne pour type et une pour sentence
@@ -31,7 +26,6 @@ public class MyServer {
             while (counter.readLine() != null) dataSize++;
             counter.close();
             data = new String[dataSize][2];
-
             String curLine;
             int i = 0;
             while ((curLine = bufferedReader.readLine()) != null){
