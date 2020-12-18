@@ -33,10 +33,12 @@ import java.io.*;
 import java.net.*;
 
 public class MyClient {
-    public int transmitionStarted = 0;
+    public boolean transmitionStarted = false;
     public int id;
     public String Requests[];
     public boolean GoodbyeSent = false;
+    public boolean requestSent = false;
+    public boolean serverStartedResponding = false;
 
     //commande hostname     Damien : LAPTOP-TQFF0SRJ  Arnaud : LAPTOP-I9J1EU77
     public MyClient(int id, String[] Requests){
@@ -60,11 +62,18 @@ public class MyClient {
             while ((fromServer = in.readLine()) != null || i < this.Requests.length) {
                 if(!fromServer.equals("")){
                     System.out.println("Server: " + fromServer);
+                    serverStartedResponding = true;
                 }
                 if (fromServer.equals("Bye.")) {
                     break;
                 }
-                if(fromServer.equals("") || transmitionStarted == 0){
+                if(fromServer.equals("") && transmitionStarted && requestSent && serverStartedResponding){
+                    System.out.println("Client " + this.id + " : answer received\n");
+                    requestSent = false;
+                    serverStartedResponding = false;
+                    //transmitionStarted = false;
+                }
+                if(fromServer.equals("") || !transmitionStarted){
                     //le client entre une requête
                     if(GoodbyeSent){
                         fromUser = null;
@@ -76,11 +85,12 @@ public class MyClient {
                     else{
                         fromUser = this.Requests[i];
                         i++;
+                        requestSent = true;
                     }
                     if (fromUser != null) {
                         //on a commencé à parler au serveur
-                        transmitionStarted = 1;
-                        System.out.println("Client: " + fromUser);
+                        transmitionStarted = true;
+                        System.out.println("Client " + this.id + " :" + fromUser);
                         out.println(fromUser);
                     }
                 }
