@@ -71,7 +71,6 @@ public class MyClient {
                     System.out.println("Client " + this.id + " : answer received\n");
                     requestSent = false;
                     serverStartedResponding = false;
-                    //transmitionStarted = false;
                 }
                 if(fromServer.equals("") || !transmitionStarted){
                     //le client entre une requête
@@ -81,6 +80,8 @@ public class MyClient {
                     else if(i >= this.Requests.length && !GoodbyeSent){
                         fromUser = "Goodbye";
                         GoodbyeSent = true;
+                        requestSent = true;
+                        serverStartedResponding = false;
                     }
                     else{
                         fromUser = this.Requests[i];

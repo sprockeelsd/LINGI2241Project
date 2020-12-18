@@ -69,7 +69,7 @@ public class MyProtocol {
                     i++;
                 }
             }
-            //theOutputString = theOutputString + "\n";
+            theOutputString = theOutputString + "\n";
         }
         if(theOutputString == null){
             return "Couldn't find what you are looking for \n";
