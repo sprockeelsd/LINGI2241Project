@@ -14,7 +14,7 @@ class ClientThread implements Runnable{
         this.id = id;
     }
 
-    public void  run(){
+    public void run(){
         try {
             MyClient client = new MyClient(this.id, this.Requests);
             client.connect("LAPTOP-TQFF0SRJ", 1234);
