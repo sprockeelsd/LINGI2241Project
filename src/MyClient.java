@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyClient {
@@ -12,7 +13,6 @@ public class MyClient {
     public String requests[];
     public long timersSent[];
     public long timersReceived[];
-
 
     //commande hostname     Damien : LAPTOP-TQFF0SRJ  Arnaud : LAPTOP-I9J1EU77
     public MyClient(int id, String[] Requests){
@@ -45,6 +45,7 @@ public class MyClient {
                     timersReceived[i] = System.currentTimeMillis();
                     for(int k = 0; k < timersSent.length; k++){
                         long delay = timersReceived[k] - timersSent[k];
+                        MyServer.delays.add(delay);
                         System.out.println("time to receive answer for request " +  k + " for Client " + id +
                                 " : " + delay);
                     }

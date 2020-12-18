@@ -1,11 +1,10 @@
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         //commande hostname     Damien : LAPTOP-TQFF0SRJ  Arnaud : LAPTOP-I9J1EU77
         int number_of_clients = 50; //Nombre max de threads clients.
         int number_of_requests = 3; //Nombre de requêtes par client.
@@ -23,5 +22,11 @@ public class Main {
             executor.execute(worker);
         }
         executor.shutdown();
+        Thread.sleep(20000);
+        PrintWriter writer = new PrintWriter("delays.csv", "UTF-8");
+        while(!MyServer.delays.isEmpty()){
+            writer.println(Long.toString(MyServer.delays.remove(0)));
+        }
+        writer.close();
     }
 }

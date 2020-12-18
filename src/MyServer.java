@@ -3,6 +3,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.io.*;
 
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -10,6 +11,7 @@ public class MyServer {
     public static String[][] data;  //les données du fichier
     public static int dataSize;
     public static int portNumber = 1234;  //1234
+    public static ArrayList<Long> delays = new ArrayList<Long>();
 
     public static void main (String[] args) throws FileNotFoundException {
         String file = "dbdata.txt"; //nom du fichier
