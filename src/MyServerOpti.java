@@ -2,15 +2,17 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class MyServerOpti {
     public static String[][] data;  //les données du fichier
-    public static HashMap<String, String[]> data_opti;
+    public static HashMap<String, ArrayList<String>> data_opti;
     public static int portNumber = 1234;  //1234
 
     public static void main (String[] args) throws FileNotFoundException {
@@ -23,22 +25,19 @@ public class MyServerOpti {
 
             //charger le fichier et le mettre dans un tableau data[N][2] ou N = nb de lignes : une colonne pour type et une pour sentence
             //compte le nombre de lignes dans le fichier
-            data_opti = new HashMap<String, String[]>();
+            data_opti = new HashMap<String, ArrayList<String>>();
             String curLine2;
-            int[] indices= new int[6];
+            ArrayList<ArrayList<String>> List_of_strings = new ArrayList<ArrayList<String>>();
+            for(int i =0;i<=5;i++){
+                List_of_strings.add(new ArrayList<String>());
+            }
             while ((curLine2 = bufferedReader.readLine()) != null){
                 String [] splitString = curLine2.split("@@@");
                 int type = Integer.parseInt(splitString[0]);
-                String[] previous_value = data_opti.get(splitString[0]);
-                if(previous_value == null)  {
-                    previous_value =  new String[100000];
-                    previous_value[0] = splitString[1];
-                }
-                else{
-                    previous_value[indices[type]] = splitString[1];
-                }
-                data_opti.put(splitString[0],previous_value);
-                indices[type] = indices[type] + 1;
+                List_of_strings.get(type).add(splitString[1]);
+            }
+            for(int i =0;i<=5;i++){
+                data_opti.put(((Integer)i).toString(),List_of_strings.get(i));
             }
 
             bufferedReader.close();

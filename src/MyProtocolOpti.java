@@ -31,6 +31,7 @@
 
 import java.net.*;
 import java.io.*;
+import java.util.ArrayList;
 
 public class MyProtocolOpti {
     public String processInput(String theInput) {
@@ -50,13 +51,13 @@ public class MyProtocolOpti {
                 }
                 System.out.println(integers);
                 for (int j = 0; j<integers.length;j++){
-                    String[] data_in_db = MyServerOpti.data_opti.get(integers[j]);
-                    for (int z = 0;z<data_in_db.length;z++){
-                        if(data_in_db[z].contains(input[1])){
+                    ArrayList<String> data_in_db = MyServerOpti.data_opti.get(integers[j]);
+                    for (int z = 0;z<data_in_db.size();z++){
+                        if(data_in_db.get(z).contains(input[1])){
                             if (theOutputString == null) {
-                                theOutputString = integers[j] + " " + data_in_db[z] + "\n";
+                                theOutputString = integers[j] + " " + data_in_db.get(z) + "\n";
                             } else {
-                                theOutputString = theOutputString + integers[j] + " " + data_in_db[z] + "\n";
+                                theOutputString = theOutputString + integers[j] + " " + data_in_db.get(z) + "\n";
                             }
                         }
                     }
