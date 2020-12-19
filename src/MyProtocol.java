@@ -13,7 +13,7 @@ public class MyProtocol {
                 return "Bye.\n";
             }
             if(input.length == 2) {
-                int types[] = {1, 2, 3, 4, 5};  //cas par défaut
+                int types[] = {0, 1, 2, 3, 4, 5};  //cas par défaut
                 if (!input[0].equals("")) {   //si les types sont précisés
                     String integers[] = input[0].split(",");    //récupérer les types
                     types = new int[integers.length];
@@ -31,6 +31,7 @@ public class MyProtocol {
                                     theOutputString = currLine[0] + " " + currLine[1] + "\n";
                                 } else {
                                     theOutputString = theOutputString + currLine[0] + " " + currLine[1] + "\n";
+                                    //System.out.println(theOutputString);
                                 }
                             }
                         }

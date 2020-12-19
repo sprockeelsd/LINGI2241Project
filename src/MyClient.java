@@ -71,6 +71,9 @@ public class MyClient {
                         timersSent[i] = System.currentTimeMillis();
                     }
                     else{
+                        long random = (long) Math.random();
+                        //changer ici pour le temps entre 2 requêtes
+                        Thread.sleep(1000*random);
                         fromUser = this.requests[i];
                         i++;
                         requestSent = true;
@@ -91,6 +94,8 @@ public class MyClient {
             System.err.println("Couldn't get I/O for the connection to " +
                     hostName);
             System.exit(1);
+        } catch (InterruptedException e) {
+            System.err.println("error");
         }
     }
 }
