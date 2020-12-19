@@ -52,7 +52,7 @@ public class MyClient {
                     break;
                 }
                 if(fromServer.equals("") && transmitionStarted && requestSent && serverStartedResponding){
-                    timersReceived[j] = System.currentTimeMillis() - timersReceived[j];
+                    timersReceived[j] = System.currentTimeMillis();
                     j++;
                     //System.out.println("Client " + this.id + " : answer received\n");
                     requestSent = false;
