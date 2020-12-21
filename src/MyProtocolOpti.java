@@ -45,7 +45,7 @@ public class MyProtocolOpti {
                 return "Bye.\n";
             }
             if(input.length == 2) {
-                String[] integers = new String[]{"1", "2", "3", "4", "5"};  //cas par défaut
+                String[] integers = new String[]{"0", "1", "2", "3", "4", "5"};  //cas par défaut
                 if (!input[0].equals("")) {   //si les types sont précisés
                     integers = input[0].split(",");    //récupérer les types
                 }

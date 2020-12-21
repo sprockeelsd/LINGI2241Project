@@ -16,8 +16,8 @@ class ClientThread implements Runnable{
 
     public void run(){
         try {
-            MyClient client = new MyClient(this.id, this.Requests);
-            client.connect("LAPTOP-TQFF0SRJ", 1234);
+            NewClient client = new NewClient(this.id, this.Requests);
+            client.connect("LAPTOP-I9J1EU77", 1234);
         }
         catch (IOException e){
             System.err.println("I/O Exception error");
