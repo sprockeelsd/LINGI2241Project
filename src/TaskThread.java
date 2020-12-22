@@ -28,8 +28,11 @@ class TaskThread implements Runnable
             MyProtocol protocol = new MyProtocol();
             outputLine = protocol.processInput(null);
             out.println(outputLine);
-
+            // Connection with the client has been established
             while ((inputLine = in.readLine()) != null) {
+                if(inputLine.equals("")){
+                    continue;
+                }
                 outputLine = protocol.processInput(inputLine);
                 out.println(outputLine);
                 if (outputLine.equals("Bye."))

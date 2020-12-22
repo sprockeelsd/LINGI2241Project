@@ -43,7 +43,7 @@ public class NewClient {
 
             while ((fromServer = in.readLine())!=null) {
                 //Print What the Server sent
-                //System.out.println("fromServer :" + " to Client " + this.id + " "  +  fromServer);
+                System.out.println("fromServer :" + " to Client " + this.id + " "  +  fromServer);
 
                 // We exit the connect if the server sends Bye.
                 if (fromServer.equals("Bye.")) {
