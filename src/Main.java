@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         //commande hostname     Damien : LAPTOP-TQFF0SRJ  Arnaud : LAPTOP-I9J1EU77
-        int number_of_clients = 5; //Nombre max de threads clients.
+        int number_of_clients = 1; //Nombre max de threads clients.
         int number_of_requests = 3; //Nombre de requêtes par client.
         ExecutorService executor = Executors.newFixedThreadPool(number_of_clients);
         //Ici on fait les initialisations des requêtes qu'on veut que le client fasse.
@@ -97,7 +97,7 @@ public class Main {
             //changer ici pour la difficulté des requests
             //int rand = (int) (number_of_requests * Math.random());
             //String[] theseRequests = easyRequests[rand];
-            String[] theseRequests = averageRequests[1];
+            String[] theseRequests = myrequests5;
             Runnable worker = new ClientThread(i,theseRequests);
             executor.execute(worker);
         }
