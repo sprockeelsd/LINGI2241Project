@@ -8,14 +8,14 @@ public class MyProtocol {
             theOutputString = "connection established or wrong argument";
         }
         else {
-            String[] input = theInput.split(";"); //récupère les types et la phrase
+            String[] input = theInput.split(";",2); //récupère les types et la phrase
             if(input[0].equals("Goodbye")){ //si le client veut se déconnecter
                 return "Bye.\n";
             }
             if(input.length == 2) {
                 int types[] = {0, 1, 2, 3, 4, 5};  //cas par défaut
                 if (!input[0].equals("")) {   //si les types sont précisés
-                    String integers[] = input[0].split(",");    //récupérer les types
+                    String integers[] = input[0].split(",",2);    //récupérer les types
                     types = new int[integers.length];
                     for (int k = 0; k < integers.length; k++) {
                         types[k] = Integer.parseInt(integers[k]);
