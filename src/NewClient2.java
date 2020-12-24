@@ -20,7 +20,14 @@ public class NewClient2 {
         this.timersReceived = new long[requests.length + 1];
     }
 
-    public void connect(String hostName, int portNumber) throws IOException {
+    public void connect(String hostName, int portNumber) throws IOException, InterruptedException {
+
+        // The client has a certain probability to connect to the server, if he doesn't he has to wait then he can try again.
+        double random2 = Math.random();
+        while(random2 > 0.1){
+            Thread.sleep(100);
+            random2 = Math.random();
+        }
 
         try (
                 Socket kkSocket = new Socket(hostName, portNumber);
@@ -37,17 +44,16 @@ public class NewClient2 {
             int j = 0;
 
 
+            // We start by sending the first request.
             fromUser = this.requests[i];
             timersSent[i] = System.currentTimeMillis();
             i++;
             out.println(fromUser);
 
-            long previoustime = timersSent[i-1];
-            long actualtime;
 
             while ((fromServer = in.readLine())!=null) {
                 //Print What the Server sent
-                System.out.println("fromServer :" + " to Client " + this.id + " "  +  fromServer);
+                //System.out.println("fromServer :" + " to Client " + this.id + " "  +  fromServer);
 
 
                 // We exit the connect if the server sends Bye.
@@ -57,26 +63,35 @@ public class NewClient2 {
                         long delay = timersReceived[k] - timersSent[k];
                         //System.out.println("time sent request " + k +"  " + timersSent[k] + " for Client " + id );
                         //System.out.println("time received request " + k +"  "+ timersReceived[k] + " for Client " + id);
-                        System.out.println("time to receive answer for request " +  k + " for Client " + id +
-                                " : " + delay);
+                        //System.out.println("time to receive answer for request " +  k + " for Client " + id +
+                        //        " : " + delay);
+                        System.out.println(delay);
                     }
+                    System.out.println("Temps total de connection");
+                    System.out.println(timersReceived[requests.length]-timersSent[0]);
                     break;
                 }
 
-                double random = Math.random();
-                actualtime = System.currentTimeMillis();
 
-                //Si la probabilité est plus grande et qu'on a attendu le temps suffisant on envoie la nouvelle requête
-                if(random>0.2 && ((actualtime-previoustime)>= 100) && (i<this.requests.length)){
+                // While we have things to send..
+                if( (i<=this.requests.length)){
+
+                    // We wait a random time between 0-100 millisec before sending the next request.
+                    random2 = Math.random();
+                    Thread.sleep((long)(100*random2));
                     timersSent[i] = System.currentTimeMillis();
-                    previoustime = timersSent[i];
-
-                    fromUser = this.requests[i];
+                    // We send every request and a the end we send Goodbye.
+                    if(i>= this.requests.length){
+                        fromUser = "Goodbye";
+                    }
+                    else {
+                        fromUser = this.requests[i];
+                    }
                     i++;
                     out.println(fromUser);
                 }
 
-                //Increment numberofnewline to check if it's the end of the request,back to 0 if it is a line of the request
+                //Increment numberofnewline to check if it's the end of the request, back to 0 if it is a line of the request
                 if(fromServer.equals("")){
                     numberofnewline++;
                 }
@@ -86,24 +101,12 @@ public class NewClient2 {
 
                 //If the number of new line is 2 it means we are at the end of the request
                 if(fromServer.equals("") && numberofnewline >= 2){
-                    if(GoodbyeSent){
-                        continue;
+                    // If we haven't received every request yet we keep receiving them.
+                    if(j<this.requests.length){
+                        timersReceived[j] = System.currentTimeMillis();
+                        //System.out.println("Client " + this.id + " : answer received\n");
+                        j++;
                     }
-                    timersReceived[j] = System.currentTimeMillis();
-                    //System.out.println("Client " + this.id + " : answer received\n");
-                    j++;
-                    requestSent = false;
-
-                    // If we received all requests we send Goodbye
-                    if(j>= this.requests.length){
-                        timersSent[i] = System.currentTimeMillis();
-                        fromUser = "Goodbye";
-                        GoodbyeSent = true;
-                        i++;
-                        out.println(fromUser);
-                    }
-
-                    continue;
                 }
             }
         } catch (UnknownHostException e) {

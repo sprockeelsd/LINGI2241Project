@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class NewClient {
-    public boolean GoodbyeSent = false;
-    public boolean requestSent = false;
     //attributs
     public int id;
     public String requests[];
@@ -20,7 +18,14 @@ public class NewClient {
         this.timersReceived = new long[requests.length + 1];
     }
 
-    public void connect(String hostName, int portNumber) throws IOException {
+    public void connect(String hostName, int portNumber) throws IOException, InterruptedException {
+
+        // The client has a certain probability to connect to the server, if he doesn't he has to wait then he can try again.
+        double random2 = Math.random();
+        while(random2 > 0.1){
+            Thread.sleep(100);
+            random2 = Math.random();
+        }
 
         try (
                 Socket kkSocket = new Socket(hostName, portNumber);
@@ -28,8 +33,8 @@ public class NewClient {
                 BufferedReader in = new BufferedReader(
                         new InputStreamReader(kkSocket.getInputStream()));
         ) {
-            //BufferedReader stdIn =
-            //new BufferedReader(new InputStreamReader(System.in));
+
+
             String fromServer;
             String fromUser;
             int numberofnewline = 0;
@@ -37,6 +42,8 @@ public class NewClient {
             int j = 0;
 
 
+
+            // We start by sending the first request.
             fromUser = this.requests[i];
             timersSent[i] = System.currentTimeMillis();
             i++;
@@ -57,11 +64,13 @@ public class NewClient {
                         //        " : " + delay);
                         System.out.println(delay);
                     }
+                    System.out.println("Temps total de connection");
+                    System.out.println(timersReceived[requests.length]-timersSent[0]);
                     break;
                 }
 
 
-                //Increment numberofnewline to check if it's the end of the request,back to 0 if it is a line of the request
+                // Increment numberofnewline to check if it's the end of the request,back to 0 if it is a line of the request
                 if(fromServer.equals("")){
                     numberofnewline++;
                 }
@@ -71,21 +80,21 @@ public class NewClient {
 
                 //If the number of new line is 2 it means we are at the end of the request
                 if(fromServer.equals("") && numberofnewline >= 2){
-                    if(GoodbyeSent){
+                    //If we already sent every request we don't send further.
+                    if(j>=this.requests.length){
                         continue;
                     }
                     timersReceived[j] = System.currentTimeMillis();
                     //System.out.println("Client " + this.id + " : answer received\n");
                     j++;
-                    requestSent = false;
+
 
                     //we can therefore send the next request
-                    Thread.sleep(1000);
+                    Thread.sleep(100);
                     timersSent[i] = System.currentTimeMillis();
                     // If we are at the end of the requests we send goodbye
                     if(i>= this.requests.length){
                         fromUser = "Goodbye";
-                        GoodbyeSent = true;
                     }
                     // If not we send the next request
                     else{

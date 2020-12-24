@@ -5,11 +5,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Main {
-    public static int number_of_clients = 1; //Nombre max de threads clients.
+    public static int number_of_clients = 20; //Nombre max de threads clients.
     public static int number_of_requests = 5; //Nombre de requêtes par client.
     public static void main(String[] args) throws IOException, InterruptedException {
         ExecutorService executor = Executors.newFixedThreadPool(number_of_clients);
-        //Ici on fait les initialisations des requêtes qu'on veut que le client fasse.
+        // Here we initialise the different requests that the clients will make.
         String[][] easyRequests = {
                 {
                         "1;critique : great premise is executed with enough style and " +
@@ -112,17 +112,16 @@ public class Main {
                 ";GOV\n"
 
         };
-        //Ici on va boucler sur tous les clients pour les lancer.
+        // Here we make a loop to initialise every Client.
         for(int i = 0;i< number_of_clients;i++){
             //System.out.println("client lance");
             //changer ici pour la difficulté des requests
             //int rand = (int) (number_of_requests * Math.random());
             //String[] theseRequests = easyRequests[rand];
-            String[] theseRequests = testaveragetime;
+            String[] theseRequests = myrequests4;
             Runnable worker = new ClientThread(i,theseRequests);
             executor.execute(worker);
         }
-        //Thread.sleep(10000);
         executor.shutdown();
     }
 }

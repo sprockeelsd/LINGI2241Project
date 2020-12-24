@@ -13,8 +13,6 @@ class TaskThread implements Runnable
         this.clientSocket = clientSocket;
     }
 
-    // Prints task name and sleeps for 1s
-    // This Whole process is repeated 5 times
     public void run()
     {
         try
