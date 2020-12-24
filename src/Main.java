@@ -5,38 +5,37 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Main {
+    public static int number_of_clients = 100; //Nombre max de threads clients.
+    public static int number_of_requests = 5; //Nombre de requêtes par client.
     public static void main(String[] args) throws IOException, InterruptedException {
-        //commande hostname     Damien : LAPTOP-TQFF0SRJ  Arnaud : LAPTOP-I9J1EU77
-        int number_of_clients = 2; //Nombre max de threads clients.
-        int number_of_requests = 3; //Nombre de requêtes par client.
         ExecutorService executor = Executors.newFixedThreadPool(number_of_clients);
         //Ici on fait les initialisations des requêtes qu'on veut que le client fasse.
-                String[][] easyRequests = {
+        String[][] easyRequests = {
                 {
-                    "1;critique : great premise is executed with enough style and " +
-                            "thrills to keep the piece interesting throughout its close to two-hour " +
-                            "runtime \n",
-                    "3;Mr. Speaker, this bill will enable children's organizations and parents to " +
-                            "access the criminal record of persons convicted of sexual offences " +
-                            "against children, even if later the sexual offender has received a " +
-                            "pardon.\n",
-                    "4;You wrote, sir, knowing what answer you would receive\n",
+                        "1;critique : great premise is executed with enough style and " +
+                                "thrills to keep the piece interesting throughout its close to two-hour " +
+                                "runtime \n",
+                        "3;Mr. Speaker, this bill will enable children's organizations and parents to " +
+                                "access the criminal record of persons convicted of sexual offences " +
+                                "against children, even if later the sexual offender has received a " +
+                                "pardon.\n",
+                        "4;You wrote, sir, knowing what answer you would receive\n",
                         "1;critique : great premise is executed with enough style and " +
                                 "thrills to keep the piece interesting throughout its close to two-hour " +
                                 "runtime \n"
                 },
                 {
-                    "0;There is en excellent example right now in Quebec.\n",
-                    "5;Like many people, we have a very hard time making the difference " +
+                        "0;There is en excellent example right now in Quebec.\n",
+                        "5;Like many people, we have a very hard time making the difference " +
                                 "between the Liberals and the Conservatives and we have a very good " +
                                 "illustration of that in this case\n",
-                    "0;And wilt encounter with my wrath, say so\n" ,
+                        "0;And wilt encounter with my wrath, say so\n" ,
                         "0;There is en excellent example right now in Quebec.\n"
                 },
                 {
-                    "3;To that I call!  [To LAVINIA]  What, would'st thou kneel with me?\n",
-                    "5;BOY. Good grandsire, leave these bitter deep laments\n",
-                    "5;Which made me down to throw my books, and fly-\n",
+                        "3;To that I call!  [To LAVINIA]  What, would'st thou kneel with me?\n",
+                        "5;BOY. Good grandsire, leave these bitter deep laments\n",
+                        "5;Which made me down to throw my books, and fly-\n",
                         "3;To that I call!  [To LAVINIA]  What, would'st thou kneel with me?\n"
                 }
         };
@@ -59,17 +58,17 @@ public class Main {
         };
         String[][] hardRequests = {
                 {
-                    ";C\n",
+                        ";C\n",
                         ";a\n",
                         ";or\n"
                 },
                 {
-                    ";O\n",
+                        ";O\n",
                         ";u\n",
                         ";an\n"
                 },
                 {
-                    ";A\n",
+                        ";A\n",
                         ";f\n",
                         ";o\n"
                 }
