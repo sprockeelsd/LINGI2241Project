@@ -11,7 +11,6 @@ public class MyServer {
     public static String[][] data;  //les données du fichier
     public static int dataSize;
     public static int portNumber = 1234;  //1234
-    public static ArrayList<Long> delays = new ArrayList<Long>();
 
     public static void main (String[] args) throws FileNotFoundException {
         String file = "dbdata.txt"; //nom du fichier
@@ -19,7 +18,7 @@ public class MyServer {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
         BufferedReader counter = new BufferedReader(new FileReader(file));
         try{
-            ServerSocket serverSocket = new ServerSocket(portNumber);   //crée un nouveau serveur
+            ServerSocket serverSocket = new ServerSocket(portNumber,100);   //crée un nouveau serveur
             System.out.println("serveur cree, ecoute sur le port "+portNumber);
 
             //charger le fichier et le mettre dans un tableau data[N][2] ou N = nb de lignes : une colonne pour type et une pour sentence
