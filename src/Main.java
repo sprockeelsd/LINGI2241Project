@@ -5,7 +5,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Main {
-    public static int number_of_clients = 100; //Nombre max de threads clients.
+    public static int number_of_clients = 1; //Nombre max de threads clients.
     public static int number_of_requests = 5; //Nombre de requêtes par client.
     public static void main(String[] args) throws IOException, InterruptedException {
         ExecutorService executor = Executors.newFixedThreadPool(number_of_clients);
@@ -90,13 +90,35 @@ public class Main {
         };
         String[] myrequests1 = {
                 "2;CONTENTS\n"};
+
+
+        String[] testaveragetime = {
+                "1;critique : great premise is executed with enough style and " +
+                        "thrills to keep the piece interesting throughout its close to two-hour " +
+                        "runtime \n",
+                "3;Mr. Speaker, this bill will enable children's organizations and parents to " +
+                        "access the criminal record of persons convicted of sexual offences " +
+                        "against children, even if later the sexual offender has received a " +
+                        "pardon.\n",
+                "4;You wrote, sir, knowing what answer you would receive\n",
+                "1;critique : great premise is executed with enough style and " +
+                        "thrills to keep the piece interesting throughout its close to two-hour " +
+                        "runtime \n",
+                "1;CANADA POST\n",
+                "1;LA GENDARMERIE ROYALE DU CANADA\n",
+                "1;LA LOI LECTORALE DU CANADA\n",
+                ";CON\n",
+                ";CAN\n",
+                ";GOV\n"
+
+        };
         //Ici on va boucler sur tous les clients pour les lancer.
         for(int i = 0;i< number_of_clients;i++){
             //System.out.println("client lance");
             //changer ici pour la difficulté des requests
             //int rand = (int) (number_of_requests * Math.random());
             //String[] theseRequests = easyRequests[rand];
-            String[] theseRequests = averageRequests[0];
+            String[] theseRequests = testaveragetime;
             Runnable worker = new ClientThread(i,theseRequests);
             executor.execute(worker);
         }

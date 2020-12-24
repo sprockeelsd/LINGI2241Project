@@ -36,6 +36,7 @@ public class NewClient {
             int i = 0;
             int j = 0;
 
+
             fromUser = this.requests[i];
             timersSent[i] = System.currentTimeMillis();
             i++;
@@ -43,18 +44,18 @@ public class NewClient {
 
             while ((fromServer = in.readLine())!=null) {
                 //Print What the Server sent
-                System.out.println("fromServer :" + " to Client " + this.id + " "  +  fromServer);
+                //System.out.println("fromServer :" + " to Client " + this.id + " "  +  fromServer);
 
                 // We exit the connect if the server sends Bye.
                 if (fromServer.equals("Bye.")) {
                     timersReceived[j] = System.currentTimeMillis();
                     for(int k = 0; k < timersSent.length; k++){
                         long delay = timersReceived[k] - timersSent[k];
-                        MyServer.delays.add(delay);
                         //System.out.println("time sent request " + k +"  " + timersSent[k] + " for Client " + id );
                         //System.out.println("time received request " + k +"  "+ timersReceived[k] + " for Client " + id);
-                        System.out.println("time to receive answer for request " +  k + " for Client " + id +
-                                " : " + delay);
+                        //System.out.println("time to receive answer for request " +  k + " for Client " + id +
+                        //        " : " + delay);
+                        System.out.println(delay);
                     }
                     break;
                 }
@@ -74,7 +75,7 @@ public class NewClient {
                         continue;
                     }
                     timersReceived[j] = System.currentTimeMillis();
-                    System.out.println("Client " + this.id + " : answer received\n");
+                    //System.out.println("Client " + this.id + " : answer received\n");
                     j++;
                     requestSent = false;
 

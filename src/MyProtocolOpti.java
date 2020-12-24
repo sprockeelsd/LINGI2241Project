@@ -40,7 +40,7 @@ public class MyProtocolOpti {
             theOutputString = "connection established or wrong argument";
         }
         else {
-            String[] input = theInput.split(";"); //récupère les types et la phrase
+            String[] input = theInput.split(";",2); //récupère les types et la phrase
             if(input[0].equals("Goodbye")){ //si le client veut se déconnecter
                 return "Bye.\n";
             }

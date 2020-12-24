@@ -14,10 +14,11 @@ class ClientThread implements Runnable{
         this.id = id;
     }
 
+    // Arnaud Desktop : DESKTOP-G189FND , LAPTOP :  LAPTOP-I9J1EU77
     public void run(){
         try {
             NewClient client = new NewClient(this.id, this.Requests);
-            client.connect("LAPTOP-I9J1EU77", 1234);
+            client.connect("DESKTOP-G189FND", 1234);
         }
         catch (IOException e){
             System.err.println("I/O Exception error");
