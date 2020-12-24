@@ -28,7 +28,7 @@ public class MyProtocol {
                 int i = 0;
                 while (i < MyServer.dataSize) { // We loop through the data
                     String currLine[] = {MyServer.data[i][0], MyServer.data[i][1]};
-                    if (currLine[1].contains(input[1])) {   // If the sentence written contains the input.
+                    if (currLine[1].contains(input[1])) {   // If the sentence written in the db contains the input.
                         for (int k = 0; k < types.length; k++) { // If it has the right type.
                             if (Integer.parseInt(currLine[0]) == types[k]) {    // If it is the right type.
                                 if (theOutputString == null) {
@@ -48,7 +48,7 @@ public class MyProtocol {
         if(theOutputString == null){
             return "Couldn't find what you are looking for \n";
         }
-        System.out.println(theOutputString);
+        //System.out.println(theOutputString);
         return theOutputString;
     }
 }

@@ -42,7 +42,7 @@ public class MyServer {
             ExecutorService executor = Executors.newFixedThreadPool(nbThreads); // The number of threads.
             while(true){
                 //We wait for the clients to connect and accept them.
-                Socket clientSocket = serverSocket.accept();//retourne un socket lié au port portNumber et avec le n. de port et l'adresse du client
+                Socket clientSocket = serverSocket.accept();
                 System.out.println("client connecte");
                 Runnable worker = new TaskThread(clientSocket);
                 executor.execute(worker);

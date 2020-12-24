@@ -35,25 +35,28 @@ import java.util.ArrayList;
 
 public class MyProtocolOpti {
     public String processInput(String theInput) {
+
         String theOutputString = null; //return value
-        if (theInput == null || theInput.equals("")) {//si l'argument est nul  || theInput.equals("\n") || theInput.equals("")
+
+        // When we establish connection otherwise a wrong argument has been sent to the server.
+        if (theInput == null || theInput.equals("")) {
             theOutputString = "connection established or wrong argument";
         }
         else {
-            String[] input = theInput.split(";",2); //récupère les types et la phrase
-            if(input[0].equals("Goodbye")){ //si le client veut se déconnecter
+            String[] input = theInput.split(";",2); //We split the input.
+
+            if(input[0].equals("Goodbye")){   // If the client has finished to send it's request we can send him Bye.
                 return "Bye.\n";
             }
             if(input.length == 2) {
-                String[] integers = new String[]{"0", "1", "2", "3", "4", "5"};  //cas par défaut
-                if (!input[0].equals("")) {   //si les types sont précisés
-                    integers = input[0].split(",");    //récupérer les types
+                String[] integers = new String[]{"0", "1", "2", "3", "4", "5"};  // By default the 5 types.
+                if (!input[0].equals("")) {   // If the type are specified by the input we only take them into account
+                    integers = input[0].split(",", 2);    //récupérer les types
                 }
-                System.out.println(integers);
-                for (int j = 0; j<integers.length;j++){
+                for (int j = 0; j<integers.length;j++){ // We loop through the data mapping to the integers we are looking for.
                     ArrayList<String> data_in_db = MyServerOpti.data_opti.get(integers[j]);
                     for (int z = 0;z<data_in_db.size();z++){
-                        if(data_in_db.get(z).contains(input[1])){
+                        if(data_in_db.get(z).contains(input[1])){ // If the sentence written in the db contains the input
                             if (theOutputString == null) {
                                 theOutputString = integers[j] + " " + data_in_db.get(z) + "\n";
                             } else {
@@ -69,7 +72,7 @@ public class MyProtocolOpti {
         if(theOutputString == null){
             return "Couldn't find what you are looking for \n";
         }
-        System.out.println(theOutputString);
+        //System.out.println(theOutputString);
         return theOutputString;
     }
 }
