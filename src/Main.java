@@ -5,8 +5,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Main {
-    public static int number_of_clients = 50; //Nombre max de threads clients.
+    public static int number_of_clients = 4; //Nombre max de threads clients.
     public static int number_of_requests = 5; //Nombre de requêtes par client.
+    public static double arrival_rate = 5; // Arrival rate of the client per second.
     public static void main(String[] args) throws IOException, InterruptedException {
         ExecutorService executor = Executors.newFixedThreadPool(number_of_clients);
         // Here we initialise the different requests that the clients will make.
@@ -53,6 +54,11 @@ public class Main {
                         "5;GOVERNMENT\n"
                 }
         };
+        String[] hardRequests = {
+                ";CON\n",
+                ";CAN\n",
+                ";GOV\n"
+        };
         String[][] veryhardRequests = {
                 {
                         ";C\n",
@@ -71,37 +77,12 @@ public class Main {
                 }
         };
 
-        String[] hardRequests = {
-                ";CON\n",
-                ";CAN\n",
-                ";GOV\n"
-        };
-
-
-        String[] testaveragetime = {
-                "1;critique : great premise is executed with enough style and " +
-                        "thrills to keep the piece interesting throughout its close to two-hour " +
-                        "runtime \n",
-                "3;Mr. Speaker, this bill will enable children's organizations and parents to " +
-                        "access the criminal record of persons convicted of sexual offences " +
-                        "against children, even if later the sexual offender has received a " +
-                        "pardon.\n",
-                "4;You wrote, sir, knowing what answer you would receive\n",
-                "1;CANADA POST\n",
-                "1;LA GENDARMERIE ROYALE DU CANADA\n",
-                "1;LA LOI LECTORALE DU CANADA\n",
-                ";CON\n",
-                ";CAN\n",
-                ";GOV\n"
-
-        };
         // Here we make a loop to initialise every Client.
         for(int i = 0;i< number_of_clients;i++){
             //System.out.println("client lance");
-            //changer ici pour la difficulté des requests
-            //int rand = (int) (number_of_requests * Math.random());
-            //String[] theseRequests = easyRequests[rand];
-            String[] theseRequests = testaveragetime;
+            String[] theseRequests = averageRequests[1];
+            double random = Math.random() * 2;
+            //Thread.sleep((long)((1/arrival_rate)*1000*random)); // Time to wait between two clients connections in millisec
             Runnable worker = new ClientThread(i,theseRequests);
             executor.execute(worker);
         }

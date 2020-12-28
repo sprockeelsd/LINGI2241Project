@@ -13,14 +13,14 @@ import java.util.concurrent.Executors;
 public class MyServerOpti {
     public static HashMap<String, ArrayList<String>> data_opti; // The data will be stored in a Hashmap with the key being a String containing the type.
     public static int portNumber = 1234;  //1234
-    public static int nbThreads = 30;
+    public static int nbThreads = 4;
 
     public static void main (String[] args) throws FileNotFoundException {
         String file = "dbdata.txt"; //Name of the file
         // To read the file
         BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
         try{
-            ServerSocket serverSocket = new ServerSocket(portNumber);   //crée un nouveau serveur
+            ServerSocket serverSocket = new ServerSocket(portNumber, 100);   //crée un nouveau serveur
             System.out.println("serveur cree, ecoute sur le port "+portNumber);
 
             // We load the file and we start by putting it in a ArrayList of ArrayList<String> we then convert it to the HashMap we wanted.

@@ -11,7 +11,7 @@ public class MyServer {
     public static String[][] data;  // The data is stored in a double array of String.
     public static int dataSize;
     public static int portNumber = 1234;  //1234
-    public static int nbThreads = 30;
+    public static int nbThreads = 4;
 
     public static void main (String[] args) throws FileNotFoundException {
         String file = "dbdata.txt"; // Name of the file

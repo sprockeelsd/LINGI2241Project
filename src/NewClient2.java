@@ -22,12 +22,6 @@ public class NewClient2 {
 
     public void connect(String hostName, int portNumber) throws IOException, InterruptedException {
 
-        // The client has a certain probability to connect to the server, if he doesn't he has to wait then he can try again.
-        double random2 = Math.random();
-        while(random2 > 0.1){
-            Thread.sleep(100);
-            random2 = Math.random();
-        }
 
         try (
                 Socket kkSocket = new Socket(hostName, portNumber);
@@ -65,9 +59,9 @@ public class NewClient2 {
                         //System.out.println("time received request " + k +"  "+ timersReceived[k] + " for Client " + id);
                         //System.out.println("time to receive answer for request " +  k + " for Client " + id +
                         //        " : " + delay);
-                        System.out.println(delay);
+                        //System.out.println(delay);
                     }
-                    System.out.println("Temps total de connection");
+                    //System.out.println("Temps total de connection");
                     System.out.println(timersReceived[requests.length]-timersSent[0]);
                     break;
                 }
@@ -76,9 +70,9 @@ public class NewClient2 {
                 // While we have things to send..
                 if( (i<=this.requests.length)){
 
-                    // We wait a random time between 0-100 millisec before sending the next request.
-                    random2 = Math.random();
-                    Thread.sleep((long)(100*random2));
+                    // We wait a random time between 0-200 millisec before sending the next request.
+                    double random2 = Math.random();
+                    Thread.sleep((long)(100*random2*2));
                     timersSent[i] = System.currentTimeMillis();
                     // We send every request and a the end we send Goodbye.
                     if(i>= this.requests.length){

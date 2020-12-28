@@ -20,13 +20,6 @@ public class NewClient {
 
     public void connect(String hostName, int portNumber) throws IOException, InterruptedException {
 
-        // The client has a certain probability to connect to the server, if he doesn't he has to wait then he can try again.
-        double random2 = Math.random();
-        while(random2 > 0.1){
-            Thread.sleep(100);
-            random2 = Math.random();
-        }
-
         try (
                 Socket kkSocket = new Socket(hostName, portNumber);
                 PrintWriter out = new PrintWriter(kkSocket.getOutputStream(), true);
@@ -63,8 +56,8 @@ public class NewClient {
                         //System.out.println("time to receive answer for request " +  k + " for Client " + id +
                         //        " : " + delay);
                         System.out.println(delay);
-                    }
-                    System.out.println("Temps total de connection");
+                }
+                    System.out.print("E[R] = ");
                     System.out.println(timersReceived[requests.length]-timersSent[0]);
                     break;
                 }
@@ -90,7 +83,8 @@ public class NewClient {
 
 
                     //we can therefore send the next request
-                    Thread.sleep(100);
+                    double random2 = Math.random();
+                    Thread.sleep((long)(100*2*random2));
                     timersSent[i] = System.currentTimeMillis();
                     // If we are at the end of the requests we send goodbye
                     if(i>= this.requests.length){
